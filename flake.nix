@@ -26,7 +26,7 @@
           
           src = pkgs.fetchurl {
             url = "https://ziglang.org/download/${version}/zig-x86_64-linux-${version}.tar.xz";
-            sha256 = "sha256-e+ar3r+pcMYTjRZbNI0EZOhPFvUx5xyyDA4FL64djI0=";
+            sha256 = "sha256-JK7uyK8Ww4GTSmzX2VyAeoyyz335+kDTWaqIQZXEcWw=";
           };
           
           installPhase = ''
