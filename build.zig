@@ -71,9 +71,9 @@ fn installCapyDependencies(b: *std.Build, module: *std.Build.Module, options: Ca
         .linux, .freebsd => {
             if (target.result.abi.isAndroid()) {
                 const sdk = AndroidSdk.init(b, null, .{});
-                var libraries = std.ArrayList([]const u8).init(b.allocator);
-                try libraries.append("android");
-                try libraries.append("log");
+                var libraries = std.ArrayListUnmanaged([]const u8){};
+                try libraries.append(b.allocator, "android");
+                try libraries.append(b.allocator, "log");
                 const config = AndroidSdk.AppConfig{
                     .target_version = options.android_version,
                     // This is displayed to the user
