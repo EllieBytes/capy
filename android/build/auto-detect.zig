@@ -333,7 +333,12 @@ pub fn findUserConfig(b: *Builder, versions: Sdk.ToolchainVersions) !UserConfig 
         };
         defer file.close();
 
-        var buf_writer = std.io.bufferedWriter(file.writer());
+        var buffer: [4096]u8 = undefined;
+
+        var buf_writer = std.io.BufferedWriter(4096, @TypeOf(file.writer())){
+            .unbuffered_writer = file.writer(),
+            .buffer = &buffer,
+        };
 
         std.json.stringify(config, .{}, buf_writer.writer()) catch |err| {
             print("Error writing config file {s}: {s}\n", .{ config_path, @errorName(err) });
