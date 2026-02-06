@@ -295,6 +295,6 @@ comptime {
     const supported_zig = std.SemanticVersion.parse("0.14.1") catch unreachable;
     const zig_version = @import("builtin").zig_version;
     if (zig_version.order(supported_zig) != .eq) {
-        @compileError(std.fmt.comptimePrint("unsupported Zig version ({}). Zig 0.14.1 is required.", .{@import("builtin").zig_version}));
+        @compileError("unsupported Zig version (" ++ @tagName(builtin.zig_version) ++ ") Zig >=0.14.1 is required.");
     }
 }
