@@ -198,11 +198,11 @@ pub fn runStep(step: *std.Build.Step.Compile, options: CapyRunOptions) !*std.Bui
                 //     .password = options.android.password,
                 // };
 
-                var libraries = std.ArrayList([]const u8).init(b.allocator);
-                try libraries.append("GLESv2");
-                try libraries.append("EGL");
-                try libraries.append("android");
-                try libraries.append("log");
+                var libraries = std.ArrayListUnmanaged([]const u8){};
+                try libraries.append(b.allocator, "GLESv2");
+                try libraries.append(b.allocator, "EGL");
+                try libraries.append(b.allocator, "android");
+                try libraries.append(b.allocator, "log");
 
                 const config = AndroidSdk.AppConfig{
                     .target_version = .android9,
